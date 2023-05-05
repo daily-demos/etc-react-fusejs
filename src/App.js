@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Fuse from "fuse.js";
 import "./App.css";
 
+// Test data we'll be making searchable in the demo
 const initialData = [
   { name: "John Doe", age: 25, email: "johndoe@example.com" },
   { name: "Jane Doe", age: 30, email: "janedoe@example.com" },

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "React Fuse.js",
+  "name": "Real-Time Search with Fuse.js in React",
   "icons": [
     {
       "src": "favicon.ico",
