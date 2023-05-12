@@ -18,11 +18,12 @@ const options = {
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState(initialData);
-
+  
+  const fuse = new Fuse(initialData, options);
+  
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchTerm(value);
-    const fuse = new Fuse(initialData, options);
     const results = fuse.search(value).map((result) => result.item);
     setSearchResults(results);
   };
