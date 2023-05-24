@@ -11,7 +11,6 @@ const initialData = [
 ];
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState(initialData);
   
   const options = {
@@ -23,7 +22,6 @@ function App() {
   
   const handleSearch = (event) => {
     const { value } = event.target;
-    setSearchTerm(value);
 
     // If the user searched for an empty string,
     // display all data.
@@ -43,7 +41,6 @@ function App() {
       <input
         type="text"
         placeholder="Search by name or email"
-        value={searchTerm}
         onChange={handleSearch}
       />
       <table>
