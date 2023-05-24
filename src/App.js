@@ -10,23 +10,33 @@ const initialData = [
   { name: "Alice Johnson", age: 40, email: "alicejohnson@example.com" },
 ];
 
-const options = {
-  includeScore: true,
-  keys: ["name", "email"],
-};
-
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState(initialData);
   
+  const options = {
+    includeScore: true,
+    keys: ["name", "email"],
+  };
+
   const fuse = new Fuse(initialData, options);
   
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchTerm(value);
+
+    // If the user searched for an empty string,
+    // display all data.
+    if (value.length === 0) {
+      setSearchResults(initialData);
+      return;
+    }
+
     const results = fuse.search(value).map((result) => result.item);
+    console.log("results:", results)
     setSearchResults(results);
   };
+
   return (
     <div className="App">
       <h1>Real-Time Search with Fuse.js in React</h1>
