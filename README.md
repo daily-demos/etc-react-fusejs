@@ -1,6 +1,6 @@
 # etc-react-fusejs
 
-This demo shows an example of real-time search with React and [Fuse.js](https://fusejs.io/)
+This demo shows an example of real-time [fuzzy search](https://en.wikipedia.org/wiki/Approximate_string_matching) with React and [Fuse.js](https://fusejs.io/).
 
 ## Running the application
 

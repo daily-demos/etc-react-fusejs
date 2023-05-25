@@ -13,9 +13,14 @@ const initialData = [
 function App() {
   const [searchResults, setSearchResults] = useState(initialData);
   
+  // See Fuse's Scoring Theory docs for more 
+  // information about how Fuse calculates matches:
+  // https://fusejs.io/concepts/scoring-theory.html
   const options = {
     includeScore: true,
-    keys: ["name", "email"],
+    includeMatches: true,
+    threshold: 0.2,
+    keys: ["name", "age", "email"],
   };
 
   const fuse = new Fuse(initialData, options);
@@ -30,9 +35,9 @@ function App() {
       return;
     }
 
-    const results = fuse.search(value).map((result) => result.item);
-    console.log("results:", results)
-    setSearchResults(results);
+    const results = fuse.search(value);
+    const items = results.map((result) => result.item);
+    setSearchResults(items);
   };
 
   return (
