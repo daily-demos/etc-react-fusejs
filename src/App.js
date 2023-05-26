@@ -10,30 +10,42 @@ const initialData = [
   { name: "Alice Johnson", age: 40, email: "alicejohnson@example.com" },
 ];
 
-const options = {
-  includeScore: true,
-  keys: ["name", "email"],
-};
-
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState(initialData);
   
+  // See Fuse's Scoring Theory docs for more 
+  // information about how Fuse calculates matches:
+  // https://fusejs.io/concepts/scoring-theory.html
+  const options = {
+    includeScore: true,
+    includeMatches: true,
+    threshold: 0.2,
+    keys: ["name", "age", "email"],
+  };
+
   const fuse = new Fuse(initialData, options);
   
   const handleSearch = (event) => {
     const { value } = event.target;
-    setSearchTerm(value);
-    const results = fuse.search(value).map((result) => result.item);
-    setSearchResults(results);
+
+    // If the user searched for an empty string,
+    // display all data.
+    if (value.length === 0) {
+      setSearchResults(initialData);
+      return;
+    }
+
+    const results = fuse.search(value);
+    const items = results.map((result) => result.item);
+    setSearchResults(items);
   };
+
   return (
     <div className="App">
       <h1>Real-Time Search with Fuse.js in React</h1>
       <input
         type="text"
         placeholder="Search by name or email"
-        value={searchTerm}
         onChange={handleSearch}
       />
       <table>
